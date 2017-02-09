@@ -32,14 +32,15 @@ public class CustomCanvas extends GLCanvas implements GLEventListener {
     @Override
     public void display(GLAutoDrawable drawable) {
         drawCube(drawable);
-        drawSphere(drawable);
+        drawSphere(drawable, 1.2f, 64, 64);
     }
 
     @Override
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
         GL2 gl = drawable.getGL().getGL2();
-        if(height <=0)
+        if(height <=0) {
             height =1;
+        }
         final float h = (float) width / (float) height;
         gl.glViewport(3, 6, width, height);
         gl.glMatrixMode(GL2.GL_PROJECTION);
@@ -49,29 +50,11 @@ public class CustomCanvas extends GLCanvas implements GLEventListener {
         gl.glLoadIdentity();
     }
 
-    private void setCamera(GL2 gl, GLU glu, float distance) {
-        // Change to projection matrix.
-        gl.glMatrixMode(GL2.GL_PROJECTION);
-        gl.glLoadIdentity();
-
-        // Perspective.
-        float widthHeightRatio = (float) getWidth() / (float) getHeight();
-        glu.gluPerspective(45, widthHeightRatio, 1, 1000);
-        glu.gluLookAt(0, 0, distance, 0, 0, 0, 0, 1, 0);
-
-        // Change back to model view matrix.
-        gl.glMatrixMode(GL2.GL_MODELVIEW);
-        gl.glLoadIdentity();
-    }
-
     private void drawCube(GLAutoDrawable drawable) {
         final GL2 gl = drawable.getGL().getGL2();
         gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT );
         gl.glLoadIdentity();
         gl.glTranslatef( 0f, 0f, -5.0f );
-
-        // Rotate The Cube On X, Y & Z
-//        gl.glRotatef(rquad, 1.0f, 1.0f, 1.0f);
 
         //giving different colors to different sides
         gl.glBegin(GL2.GL_QUADS); // Start Drawing The Cube
@@ -115,7 +98,7 @@ public class CustomCanvas extends GLCanvas implements GLEventListener {
         rquad -= 0.15f;
     }
 
-    private void drawSphere(GLAutoDrawable drawable) {
+    private void drawSphere(GLAutoDrawable drawable, float radius, int slices, int stacks) {
         final GL2 gl = drawable.getGL().getGL2();
 
         float SHINE_ALL_DIRECTIONS = 1;
@@ -123,7 +106,7 @@ public class CustomCanvas extends GLCanvas implements GLEventListener {
         float[] lightColorAmbient = {0.2f, 0.2f, 0.2f, 1f};
         float[] lightColorSpecular = {0.8f, 0.8f, 0.8f, 1f};
 
-        gl.glRotatef(rquad, 1.0f, 1.0f, 1.0f);
+        gl.glRotatef(rquad, 0.0f, 1.0f, 0.0f);
 
         // Set light parameters.
         gl.glLightfv(GL2.GL_LIGHT1, GL2.GL_POSITION, lightPos, 0);
@@ -140,20 +123,13 @@ public class CustomCanvas extends GLCanvas implements GLEventListener {
         gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_SPECULAR, rgba, 0);
         gl.glMaterialf(GL2.GL_FRONT, GL2.GL_SHININESS, 0.5f);
 
-        //setCamera(gl, glu, 10);
-
-
         // Draw sphere (possible styles: FILL, LINE, POINT).
         GLUquadric earth = glu.gluNewQuadric();
 
         glu.gluQuadricDrawStyle(earth, GLU.GLU_FILL);
         glu.gluQuadricNormals(earth, GLU.GLU_FLAT);
         glu.gluQuadricOrientation(earth, GLU.GLU_OUTSIDE);
-        final float radius = 1.0f;
-        final int slices = 56;
-        final int stacks = 56;
         glu.gluSphere(earth, radius, slices, stacks);
         glu.gluDeleteQuadric(earth);
-
     }
 }
