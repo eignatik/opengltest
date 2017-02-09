@@ -9,20 +9,23 @@ import java.awt.*;
 
 public class Display {
     private static Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+    private JFrame frame = new JFrame();
 
-    public void showFigure(String title, GLCanvas canvas, GLEventListener shape, FPSAnimator animator) {
+    public void addFigure(String title, GLCanvas canvas, GLEventListener shape, FPSAnimator animator) {
         canvas.addGLEventListener(shape);
-        showFrame(title, canvas);
+        addFigureToFrame(canvas);
         startAnimator(animator);
     }
 
-    private void showFrame(String title, GLCanvas canvas) {
-        JFrame frame = new JFrame(title);
+    public void showFrame() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(canvas, BorderLayout.CENTER);
         frame.pack();
         setFrameSize(frame);
         frame.setVisible(true);
+    }
+
+    private void addFigureToFrame(GLCanvas canvas) {
+        frame.getContentPane().add(canvas, BorderLayout.CENTER);
     }
 
     private void setFrameSize(JFrame frame) {
