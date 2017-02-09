@@ -1,4 +1,4 @@
-package space.eignatik.Basic.Shapes;
+package space.eignatik.Basic.Shapes.oldCanvases;
 
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;

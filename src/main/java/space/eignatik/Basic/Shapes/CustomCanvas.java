@@ -6,6 +6,8 @@ import com.jogamp.opengl.GLEventListener;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.glu.GLUquadric;
+import space.eignatik.Basic.Shapes.drawable.Drawable;
+import space.eignatik.Basic.Shapes.drawable.Sphere;
 
 public class CustomCanvas extends GLCanvas implements GLEventListener {
     private GLU glu = new GLU();
@@ -32,7 +34,11 @@ public class CustomCanvas extends GLCanvas implements GLEventListener {
     @Override
     public void display(GLAutoDrawable drawable) {
         drawCube(drawable);
-        drawSphere(drawable, 1.2f, 64, 64);
+        drawSphere(drawable, 1.5f, 24,24);
+
+        Drawable sphere = new Sphere(glu, drawable, 1.2f, 24, 24);
+        sphere.setRotatingParams(0.0f, 1.0f, 0.0f);
+        sphere.draw();
     }
 
     @Override

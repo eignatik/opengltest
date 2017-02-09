@@ -1,11 +1,13 @@
-package space.eignatik.Basic.Shapes;
+package space.eignatik.Basic.Shapes.oldCanvases;
 
+import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLEventListener;
 import com.jogamp.opengl.awt.GLCanvas;
+import com.jogamp.opengl.util.FPSAnimator;
 
-public class PolygonCanvas extends GLCanvas implements GLEventListener {
+public class LineCanvas extends GLCanvas implements GLEventListener {
     @Override
     public void init(GLAutoDrawable glAutoDrawable) {
 
@@ -20,17 +22,9 @@ public class PolygonCanvas extends GLCanvas implements GLEventListener {
     public void display(GLAutoDrawable glAutoDrawable) {
         final GL2 gl = glAutoDrawable.getGL().getGL2();
 
-        gl.glBegin(GL2.GL_POLYGON);
-
-        gl.glVertex3f(0f,0.5f,0f);
-        gl.glVertex3f(-0.5f,0.2f,0f);
-        gl.glVertex3f(-0.5f,-0.2f,0f);
-        gl.glVertex3f(0f,-0.5f,0f);
-        gl.glVertex3f(0f,0.5f,0f);
-        gl.glVertex3f(0.5f,0.2f,0f);
-        gl.glVertex3f(0.5f,-0.2f,0f);
-        gl.glVertex3f(0f,-0.5f,0f);
-
+        gl.glBegin (GL2.GL_LINES);
+        gl.glVertex3f(0.50f,-0.50f,0);
+        gl.glVertex3f(-0.50f,0.50f,0);
         gl.glEnd();
     }
 

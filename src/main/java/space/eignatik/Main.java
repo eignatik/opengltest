@@ -2,15 +2,13 @@ package space.eignatik;
 
 import com.jogamp.opengl.util.FPSAnimator;
 import space.eignatik.Basic.Display;
-import space.eignatik.Basic.Shapes.Cube;
 import space.eignatik.Basic.Shapes.CustomCanvas;
-import space.eignatik.Basic.Shapes.PolygonCanvas;
 
 public class Main {
     private static Display display = new Display();
 
     public static void main(String[] args) {
-        Checking.checkThatLibraryWorks();
+//        Checking.checkThatLibraryWorks();
 //        Cube cube = new Cube();
 //        PolygonCanvas pol = new PolygonCanvas();
 //        display.addFigure("Test", pol, new PolygonCanvas(), null);
